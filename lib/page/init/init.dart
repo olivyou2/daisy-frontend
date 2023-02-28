@@ -85,13 +85,13 @@ class _InitPageState extends State<InitPage> {
                                     fontSize: 16.sp),
                                 hintText: "이름을 입력해주세요"),
                           )),
-                      SizedBox(
-                        width: 34.w,
-                        child: Text("0/15",
-                            style: TextStyle(
-                                color: ColorPalette.gray2,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16.sp)),
+                      SizedBox(width: 10.w),
+                      Text(
+                        "0/15",
+                        style: TextStyle(
+                            color: ColorPalette.gray2,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16.sp),
                       ),
                     ],
                   ),
@@ -231,10 +231,11 @@ class _InitPageState extends State<InitPage> {
                                     fontSize: 16.sp),
                                 hintText: "거주지를 선택해주세요"),
                           )),
+                      const SizedBox(width: 29),
                       Image(
                           image: DaisyImages.dropdownBtnImage,
-                          width: 7.w,
-                          height: 14.h)
+                          width: 14.w,
+                          height: 28.h)
                     ],
                   ),
 
