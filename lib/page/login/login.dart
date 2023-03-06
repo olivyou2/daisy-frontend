@@ -1,12 +1,34 @@
 import 'package:daisy_frontend/util/color.dart';
 import 'package:daisy_frontend/util/image.dart';
+import 'package:daisy_frontend/util/storage.dart';
 import 'package:daisy_frontend/widgets/atom/socialbtn.dart';
 import 'package:daisy_frontend/widgets/molecule/dividier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key}) {
+    DeviceStorage.loadData((timestamp, storage) async {
+      final isLoginHistoryExists =
+          await storage.containsKey(key: "accessToken") &&
+              await storage.containsKey(key: "refreshToken");
+
+      if (isLoginHistoryExists) {
+        final accessToken = await storage.read(key: "accessToken");
+        final refreshToken = await storage.read(key: "refreshToken");
+
+        if (accessToken == null) {
+          return;
+        }
+
+        if (refreshToken == null) {
+          return;
+        }
+
+        // TODO: goto main page because already logged in
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
