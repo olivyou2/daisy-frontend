@@ -1,4 +1,5 @@
 import 'package:daisy_frontend/util/request.dart';
+import 'package:daisy_frontend/util/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 
@@ -28,6 +29,9 @@ class SocialBtn extends StatelessWidget {
 
     final accessToken = Uri.parse(res).queryParameters["access"];
     final refreshToken = Uri.parse(res).queryParameters["refresh"];
+
+    DeviceStorage.secureStorage.write(key: "accessToken", value: accessToken);
+    DeviceStorage.secureStorage.write(key: "refreshToken", value: refreshToken);
   }
 
   @override
