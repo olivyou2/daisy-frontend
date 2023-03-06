@@ -5,7 +5,7 @@ class Request {
   static Map<String, String> headers = {};
 
   static buildHeader(Map<String, String>? headers) {
-    const Map<String, String> builtHeaders = {};
+    Map<String, String> builtHeaders = {};
     builtHeaders.addAll(Request.headers);
 
     if (headers != null) {
