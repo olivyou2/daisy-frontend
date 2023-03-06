@@ -1,4 +1,3 @@
-import 'package:daisy_frontend/util/color.dart';
 import 'package:daisy_frontend/util/image.dart';
 import 'package:daisy_frontend/util/storage.dart';
 import 'package:daisy_frontend/widgets/atom/socialbtn.dart';
