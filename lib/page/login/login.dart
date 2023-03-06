@@ -1,5 +1,7 @@
 import 'package:daisy_frontend/util/color.dart';
 import 'package:daisy_frontend/util/image.dart';
+import 'package:daisy_frontend/widgets/atom/socialbtn.dart';
+import 'package:daisy_frontend/widgets/molecule/dividier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,59 +19,23 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 540.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 90.w,
-                  child: const Divider(
-                    color: ColorPalette.gray2,
-                    height: 1,
-                    thickness: 1,
-                  ),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                Text("간편로그인",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Pretendard",
-                        fontSize: 16.sp,
-                        color: ColorPalette.gray)),
-                SizedBox(width: 8.w),
-                SizedBox(
-                  width: 90.w,
-                  child: const Divider(
-                    color: ColorPalette.gray2,
-                    height: 1,
-                    thickness: 1,
-                  ),
-                )
-              ],
-            ),
+            const AppDivider(title: "간편로그인"),
             SizedBox(height: 50.h),
             SizedBox(
                 width: 262,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        print("카카오");
-                      },
+                  children: const [
+                    SocialBtn(
+                      type: "카카오",
                       child: DaisyImages.kakaoBtnImage,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        print("네이버");
-                      },
+                    SocialBtn(
+                      type: "네이버",
                       child: DaisyImages.naverBtnImage,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        print("구글");
-                      },
+                    SocialBtn(
+                      type: "구글",
                       child: DaisyImages.googleBtnImage,
                     ),
                   ],
