@@ -27,15 +27,15 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     SocialBtn(
-                      type: "카카오",
+                      type: SocialType.kakao,
                       child: DaisyImages.kakaoBtnImage,
                     ),
                     SocialBtn(
-                      type: "네이버",
+                      type: SocialType.naver,
                       child: DaisyImages.naverBtnImage,
                     ),
                     SocialBtn(
-                      type: "구글",
+                      type: SocialType.google,
                       child: DaisyImages.googleBtnImage,
                     ),
                   ],
