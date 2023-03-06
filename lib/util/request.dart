@@ -15,13 +15,13 @@ class Request {
     return builtHeaders;
   }
 
-  static get(String url, Map<String, String>? headers) {
+  static get(String url, {Map<String, String>? headers}) {
     var builtHeaders = Request.buildHeader(headers);
 
     http.get(Uri.parse(host + url), headers: builtHeaders);
   }
 
-  static post(String url, Map<String, String>? headers) {
+  static post(String url, {Map<String, String>? headers}) {
     var builtHeaders = Request.buildHeader(headers);
 
     http.post(Uri.parse(host + url), headers: builtHeaders);
