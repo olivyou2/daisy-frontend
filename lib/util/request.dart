@@ -5,7 +5,7 @@ class Request {
   static Map<String, String> headers = {};
 
   static buildUri(String url) {
-    final builtUrl = host = url;
+    final builtUrl = host + url;
 
     return builtUrl;
   }
