@@ -1,5 +1,6 @@
 import 'package:daisy_frontend/util/image.dart';
 import 'package:daisy_frontend/util/storage.dart';
+import 'package:daisy_frontend/util/token.dart';
 import 'package:daisy_frontend/widgets/atom/socialbtn.dart';
 import 'package:daisy_frontend/widgets/molecule/dividier.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,23 @@ class LoginPage extends StatelessWidget {
 
         if (refreshToken == null) {
           return;
+        }
+
+        TokenManager.setAccessToken(accessToken: accessToken);
+        TokenManager.setRefreshToken(refreshToken: refreshToken);
+
+        RefreshTokenResult refreshResult =
+            await TokenManager.refreshAccessToken();
+
+        print("----");
+        print("Refreshed : " + refreshResult.refreshed.toString());
+        print("Success : " + refreshResult.success.toString());
+
+        if (refreshResult.refreshed) {
+          TokenManager.setAccessToken(
+              accessToken: refreshResult.refreshedAccessToken!);
+          await storage.write(
+              key: "accessToken", value: TokenManager.getAccessToken());
         }
 
         // TODO: goto main page because already logged in
