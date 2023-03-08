@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 
 class Request {
   static String host = "http://localhost:3000";
-  static Map<String, String> headers = {};
+  static Map<String, String> headers = {"Content-Type": "application/json"};
 
   static buildUri(String url) {
     final builtUrl = host + url;
