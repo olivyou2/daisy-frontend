@@ -21,17 +21,20 @@ class Request {
     return builtHeaders;
   }
 
-  static get(String url, {Map<String, String>? headers}) {
+  static Future<http.Response> get(String url,
+      {Map<String, String>? headers}) async {
     final builtHeaders = Request.buildHeader(headers);
     final uri = Uri.parse(buildUri(url));
 
-    return http.get(uri, headers: builtHeaders);
+    final result = await http.get(uri, headers: builtHeaders);
+    return result;
   }
 
-  static post(String url, {Object? body, Map<String, String>? headers}) {
+  static Future<http.Response> post(String url,
+      {Object? body, Map<String, String>? headers}) async {
     final builtHeaders = Request.buildHeader(headers);
     final uri = Uri.parse(buildUri(url));
 
-    return http.post(uri, headers: builtHeaders, body: body);
+    return await http.post(uri, headers: builtHeaders, body: body);
   }
 }
