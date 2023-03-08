@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:daisy_frontend/util/request.dart';
+import 'package:daisy_frontend/util/storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class TokenManager {
@@ -19,9 +20,15 @@ class TokenManager {
     return TokenManager.accessToken;
   }
 
-  static Future<RefreshTokenResult> refreshAccessToken() async {
-    // TODO: access token refresh logic
+  static logout() {
+    setAccessToken(accessToken: "");
+    setRefreshToken(refreshToken: "");
 
+    DeviceStorage.secureStorage.delete(key: "accessToken");
+    DeviceStorage.secureStorage.delete(key: "refreshToken");
+  }
+
+  static Future<RefreshTokenResult> refreshAccessToken() async {
     final result = RefreshTokenResult();
 
     if (refreshToken == null) {
