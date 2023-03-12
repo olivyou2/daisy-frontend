@@ -1,8 +1,8 @@
+import 'package:daisy_frontend/login/widgets/atom/dividier.dart';
+import 'package:daisy_frontend/login/widgets/atom/socialbtn.dart';
 import 'package:daisy_frontend/util/image.dart';
 import 'package:daisy_frontend/util/storage.dart';
 import 'package:daisy_frontend/util/token.dart';
-import 'package:daisy_frontend/widgets/atom/socialbtn.dart';
-import 'package:daisy_frontend/widgets/molecule/dividier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';

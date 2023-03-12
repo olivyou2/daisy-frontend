@@ -1,5 +1,5 @@
-import 'package:daisy_frontend/page/init/init.dart';
-import 'package:daisy_frontend/page/login/login.dart';
+import 'package:daisy_frontend/init/screens/init.dart';
+import 'package:daisy_frontend/login/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
