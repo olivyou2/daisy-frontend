@@ -2,6 +2,7 @@ import 'package:daisy_frontend/page/init/init.dart';
 import 'package:daisy_frontend/page/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:daisy_frontend/page/register/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: LoginPage(),
+      child: const RegisterScreen(),
     );
   }
 }
