@@ -69,6 +69,9 @@ flutter:
     - assets/images/login/google.svg
     - assets/images/login/kakao.svg
     - assets/images/login/naver.svg
+    - assets/images/login/clicked_google.svg
+    - assets/images/login/clicked_kakao.svg
+    - assets/images/login/clicked_naver.svg
 
     - assets/images/init/camera.png
     - assets/images/init/dropdown.png

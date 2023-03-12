@@ -76,7 +76,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     SocialBtn(
                       type: SocialType.google,
-                      child: SvgPicture.asset("assets/images/login/google.svg"),
+                      child: DaisyImages.googleBtnImage,
                     ),
                   ],
                 ))

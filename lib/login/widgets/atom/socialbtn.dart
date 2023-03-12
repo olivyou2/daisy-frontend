@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:daisy_frontend/util/color.dart';
+import 'package:daisy_frontend/util/image.dart';
 import 'package:daisy_frontend/util/request.dart';
 import 'package:daisy_frontend/util/storage.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +9,13 @@ import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 enum SocialType { kakao, naver, google }
 
 class SocialBtn extends StatefulWidget {
-  final Widget child;
-  final SocialType type;
+  late Widget child;
+  late Widget clickedChild;
+
+  late SocialType type;
+
   late Color background;
+  late Color clickedBackground;
   late bool outlined;
 
   SocialBtn({super.key, required this.child, required this.type}) {
@@ -20,10 +23,19 @@ class SocialBtn extends StatefulWidget {
 
     if (type == SocialType.kakao) {
       background = const Color(0xffffe800);
+      clickedBackground = const Color(0xfffff168);
+
+      clickedChild = DaisyImages.kakaoClickedBtnImage;
     } else if (type == SocialType.naver) {
       background = const Color(0xff00D134);
+      clickedBackground = const Color(0xff92EEA9);
+
+      clickedChild = DaisyImages.naverClickedBtnImage;
     } else if (type == SocialType.google) {
       background = const Color(0xffffffff);
+      clickedBackground = const Color(0xffe9e9e9);
+
+      clickedChild = DaisyImages.googleClickedBtnImage;
       outlined = true;
     }
   }
@@ -33,6 +45,20 @@ class SocialBtn extends StatefulWidget {
 }
 
 class SocialBtnState extends State<SocialBtn> {
+  bool clicked = false;
+
+  setClicked() {
+    setState(() {
+      clicked = true;
+    });
+  }
+
+  unsetClicked() {
+    setState(() {
+      clicked = false;
+    });
+  }
+
   onTapBtn(SocialType type) async {
     var socialType = "";
 
@@ -59,19 +85,33 @@ class SocialBtnState extends State<SocialBtn> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 74.w,
-      height: 74.h,
-      decoration: BoxDecoration(
-          color: widget.background,
-          borderRadius: BorderRadius.all(Radius.circular(37.w)),
-          border:
-              widget.outlined ? Border.all(color: ColorPalette.gray2) : null),
-      child: IconButton(
-        icon: widget.child,
-        onPressed: () {
-          onTapBtn(widget.type);
-        },
-      ),
-    );
+        width: 74.w,
+        height: 74.h,
+        decoration: BoxDecoration(
+            color: clicked ? widget.clickedBackground : widget.background,
+            borderRadius: BorderRadius.all(Radius.circular(37.w)),
+            border: widget.outlined
+                ? Border.all(
+                    color:
+                        clicked ? const Color(0xffe9e9e9) : ColorPalette.gray2)
+                : null),
+        child: GestureDetector(
+          child: IconButton(
+            icon: widget.child,
+            onPressed: () {
+              unsetClicked();
+              onTapBtn(widget.type);
+            },
+          ),
+          onTapDown: (details) {
+            setClicked();
+          },
+          onTapCancel: () {
+            unsetClicked();
+          },
+          onTap: () {
+            onTapBtn(widget.type);
+          },
+        ));
   }
 }
