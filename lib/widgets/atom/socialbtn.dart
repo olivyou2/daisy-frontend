@@ -1,16 +1,38 @@
+import 'dart:ffi';
+
+import 'package:daisy_frontend/util/color.dart';
 import 'package:daisy_frontend/util/request.dart';
 import 'package:daisy_frontend/util/storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 
 enum SocialType { kakao, naver, google }
 
-class SocialBtn extends StatelessWidget {
+class SocialBtn extends StatefulWidget {
   final Widget child;
   final SocialType type;
+  late Color background;
+  late bool outlined;
 
-  const SocialBtn({super.key, required this.child, required this.type});
+  SocialBtn({super.key, required this.child, required this.type}) {
+    outlined = false;
 
+    if (type == SocialType.kakao) {
+      background = const Color(0xffffe800);
+    } else if (type == SocialType.naver) {
+      background = const Color(0xff00D134);
+    } else if (type == SocialType.google) {
+      background = const Color(0xffffffff);
+      outlined = true;
+    }
+  }
+
+  @override
+  State<StatefulWidget> createState() => SocialBtnState();
+}
+
+class SocialBtnState extends State<SocialBtn> {
   onTapBtn(SocialType type) async {
     var socialType = "";
 
@@ -36,6 +58,20 @@ class SocialBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(onTap: () => onTapBtn(type), child: child);
+    return Container(
+      width: 74.w,
+      height: 74.h,
+      decoration: BoxDecoration(
+          color: widget.background,
+          borderRadius: BorderRadius.all(Radius.circular(37.w)),
+          border:
+              widget.outlined ? Border.all(color: ColorPalette.gray2) : null),
+      child: IconButton(
+        icon: widget.child,
+        onPressed: () {
+          onTapBtn(widget.type);
+        },
+      ),
+    );
   }
 }

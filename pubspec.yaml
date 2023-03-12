@@ -41,6 +41,7 @@ dependencies:
   flutter_web_auth_2: ^2.1.1
   flutter_secure_storage: ^8.0.0
   jwt_decoder: ^2.0.1
+  flutter_svg: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -65,9 +66,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/login/google.png
-    - assets/images/login/kakao.png
-    - assets/images/login/naver.png
+    - assets/images/login/google.svg
+    - assets/images/login/kakao.svg
+    - assets/images/login/naver.svg
 
     - assets/images/init/camera.png
     - assets/images/init/dropdown.png

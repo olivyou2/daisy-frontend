@@ -5,6 +5,7 @@ import 'package:daisy_frontend/widgets/atom/socialbtn.dart';
 import 'package:daisy_frontend/widgets/molecule/dividier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key}) {
@@ -61,10 +62,10 @@ class LoginPage extends StatelessWidget {
             const AppDivider(title: "간편로그인"),
             SizedBox(height: 50.h),
             SizedBox(
-                width: 262,
+                width: 262.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     SocialBtn(
                       type: SocialType.kakao,
                       child: DaisyImages.kakaoBtnImage,
@@ -75,7 +76,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     SocialBtn(
                       type: SocialType.google,
-                      child: DaisyImages.googleBtnImage,
+                      child: SvgPicture.asset("assets/images/login/google.svg"),
                     ),
                   ],
                 ))
