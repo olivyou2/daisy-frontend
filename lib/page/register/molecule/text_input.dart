@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:daisy_frontend/page/register/label.dart';
+import 'package:daisy_frontend/page/register/molecule/label.dart';
 
 class TextInput extends StatefulWidget {
   const TextInput({super.key});
@@ -30,7 +30,7 @@ class _TextInputState extends State<TextInput> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Label(text: '성별', required: true),
+        const Label(text: '닉네임', required: true),
         TextField(
           controller: _controller,
           decoration: const InputDecoration(

@@ -42,6 +42,7 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   jwt_decoder: ^2.0.1
   flutter_svg: ^2.0.3
+  flutter_picker: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +78,7 @@ flutter:
     - assets/svgs/google.svg
     - assets/svgs/kakao.svg
     - assets/svgs/naver.svg
+    - assets/svgs/arrow_down.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
