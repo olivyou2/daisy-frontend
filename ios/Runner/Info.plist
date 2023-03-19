@@ -47,5 +47,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+    <key>NMFClientId</key>
+    <string>q31h72fqid</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>근처 매점 탐색용도</string>
 </dict>
 </plist>

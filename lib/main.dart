@@ -1,9 +1,11 @@
 import 'package:daisy_frontend/init/screens/init.dart';
 import 'package:daisy_frontend/login/screens/login.dart';
+import 'package:daisy_frontend/main/screens/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: LoginPage(),
+      child: MainPage(),
     );
   }
 }
