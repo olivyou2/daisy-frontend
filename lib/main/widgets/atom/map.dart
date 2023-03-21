@@ -10,7 +10,41 @@ class DaisyMap extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 844.h - 58.h - 158.h,
-      child: const NaverMap(),
+      child: Stack(
+        children: [
+          const NaverMap(),
+          Padding(
+            padding: EdgeInsets.only(
+              top: 628.h - 60.h - 64.h,
+            ),
+            child: Center(
+              child: GestureDetector(
+                onTapUp: onTabCreateMapBtn,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: ColorPalette.yello,
+                      borderRadius: BorderRadius.all(Radius.circular(30.w))),
+                  width: 259.w,
+                  height: 60.h,
+                  child: Center(
+                    child: Text(
+                      "데이트 지도 만들기",
+                      style: TextStyle(
+                          color: ColorPalette.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20.sp),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
+  }
+
+  void onTabCreateMapBtn(details) {
+    print("ㅎㅇ");
   }
 }
