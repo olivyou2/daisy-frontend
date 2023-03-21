@@ -1,4 +1,4 @@
-import 'package:daisy_frontend/main/widgets/atom/mapindicatorbutton.dart';
+import 'package:daisy_frontend/main/widgets/atom/mapIndicatorButton.dart';
 import 'package:daisy_frontend/main/widgets/atom/placeinput.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
