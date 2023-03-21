@@ -76,6 +76,8 @@ flutter:
     - assets/images/login/clicked_naver.svg
     - assets/images/map/search.svg
     - assets/images/map/delete.svg
+    - assets/images/main/burger.svg
+    - assets/images/main/bell.svg
 
     - assets/images/init/camera.png
     - assets/images/init/dropdown.png
