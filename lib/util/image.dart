@@ -20,6 +20,9 @@ class DaisyImages {
   static final searchImage = SvgPicture.asset("assets/images/map/search.svg");
   static final deleteImage = SvgPicture.asset("assets/images/map/delete.svg");
 
+  static final bellImage = SvgPicture.asset("assets/images/main/bell.svg");
+  static final burgerImage = SvgPicture.asset("assets/images/main/burger.svg");
+
   static const Image cameraBtnImage =
       Image(image: AssetImage("assets/images/init/camera.png"));
   static const AssetImage dropdownBtnImage =

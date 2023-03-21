@@ -9,5 +9,6 @@ class ColorPalette {
   static const Color black = Color(0xff000000);
   static const Color white = Color(0xffffffff);
 
+  static const Color yello = Color(0xffffd12d);
   static const Color yellow = Color(0xfff2a309);
 }
