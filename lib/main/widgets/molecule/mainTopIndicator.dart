@@ -16,35 +16,30 @@ class _MainTopIndicatorState extends State<MainTopIndicator> {
     return Column(
       children: [
         Padding(padding: EdgeInsets.only(top: 77.h)),
-        Center(
-          child: SizedBox(
-            width: 390.w - 47.w,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const ProfileImage(),
-                SizedBox(
-                  width: 72.w,
-                  height: 30.h,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          onPressed: () {},
-                          icon: DaisyImages.bellImage),
-                      IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          onPressed: () {},
-                          icon: DaisyImages.burgerImage)
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const ProfileImage(),
+            SizedBox(
+              width: 72.w,
+              height: 30.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      onPressed: () {},
+                      icon: DaisyImages.bellImage),
+                  IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      onPressed: () {},
+                      icon: DaisyImages.burgerImage)
+                ],
+              ),
+            )
+          ],
         )
       ],
     );

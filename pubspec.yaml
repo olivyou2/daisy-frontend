@@ -44,6 +44,7 @@ dependencies:
   flutter_svg: ^2.0.3
   flutter_naver_map: 0.10.7
   indexed: ^0.0.8
+  widget_mask: ^1.0.0+0
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,7 @@ flutter:
     - assets/images/map/delete.svg
     - assets/images/main/burger.svg
     - assets/images/main/bell.svg
+    - assets/images/mock/decoration.png
 
     - assets/images/init/camera.png
     - assets/images/init/dropdown.png

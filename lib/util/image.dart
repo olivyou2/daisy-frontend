@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DaisyImages {
@@ -27,4 +28,9 @@ class DaisyImages {
       Image(image: AssetImage("assets/images/init/camera.png"));
   static const AssetImage dropdownBtnImage =
       AssetImage("assets/images/init/dropdown.png");
+
+  // MOCKUP DATA
+
+  static const AssetImage decorationMockImage =
+      AssetImage("assets/images/mock/decoration.png");
 }
