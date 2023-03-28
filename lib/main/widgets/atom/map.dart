@@ -19,9 +19,12 @@ class _DaisyMapState extends State<DaisyMap> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
+        print(mounted);
         if (!mounted) return;
-        print("not loaded");
-        _loadMarkers();
+
+        setState(() {
+          _loadMarkers();
+        });
       },
     );
 
@@ -29,14 +32,28 @@ class _DaisyMapState extends State<DaisyMap> {
   }
 
   _loadMarkers() {
-    DaisyMarker marker = DaisyMarker(
-        markerId: "d",
-        position: const LatLng(37.3426329041238, 127.11167502411264),
-        marker: MarkerType.book);
+    for (var i = 0; i < 3; i++) {
+      MarkerType type;
 
-    // marker.loadIconImage();
+      if (i == 0) {
+        type = MarkerType.book;
+      } else if (i == 1) {
+        type = MarkerType.culture;
+      } else if (i == 2) {
+        type = MarkerType.food;
+      } else {
+        type = MarkerType.book;
+      }
 
-    markers.add(marker);
+      DaisyMarker marker = DaisyMarker(
+          markerId: "d$i",
+          position: LatLng(37.3426329041238 + 0.001 * i, 127.11167502411264),
+          marker: type);
+
+      marker.loadIconImage();
+
+      markers.add(marker);
+    }
   }
 
   @override

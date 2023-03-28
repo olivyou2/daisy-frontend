@@ -18,22 +18,22 @@ class DaisyMarker extends Marker {
     // super.height = 30;
     super.captionText = "음하하";
 
-    // if (marker == MarkerType.book) {
-    //   image = await OverlayImage.fromAssetImage(
-    //     assetName: DaisyImages.bookMarkerImage.assetName,
-    //   );
-    // } else if (marker == MarkerType.culture) {
-    //   image = await OverlayImage.fromAssetImage(
-    //       assetName: DaisyImages.cultureMarkerImage.assetName);
-    // } else if (marker == MarkerType.food) {
-    //   image = await OverlayImage.fromAssetImage(
-    //       assetName: DaisyImages.foodMarkerImage.assetName);
-    // }
+    if (marker == MarkerType.book) {
+      image = await OverlayImage.fromAssetImage(
+        assetName: DaisyImages.bookMarkerImage.assetName,
+      );
+    } else if (marker == MarkerType.culture) {
+      image = await OverlayImage.fromAssetImage(
+          assetName: DaisyImages.cultureMarkerImage.assetName);
+    } else if (marker == MarkerType.food) {
+      image = await OverlayImage.fromAssetImage(
+          assetName: DaisyImages.foodMarkerImage.assetName);
+    }
 
     if (image == null) {
       return;
     }
 
-    // icon = image;
+    icon = image;
   }
 }
