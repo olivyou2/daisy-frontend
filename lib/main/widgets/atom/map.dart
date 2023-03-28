@@ -1,10 +1,43 @@
+import 'package:daisy_frontend/main/map/marker.dart';
 import 'package:daisy_frontend/util/color.dart';
+import 'package:daisy_frontend/util/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DaisyMap extends StatelessWidget {
+class DaisyMap extends StatefulWidget {
   const DaisyMap({super.key});
+
+  @override
+  State<DaisyMap> createState() => _DaisyMapState();
+}
+
+class _DaisyMapState extends State<DaisyMap> {
+  final markers = <Marker>[];
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        if (!mounted) return;
+        print("not loaded");
+        _loadMarkers();
+      },
+    );
+
+    super.initState();
+  }
+
+  _loadMarkers() {
+    DaisyMarker marker = DaisyMarker(
+        markerId: "d",
+        position: const LatLng(37.3426329041238, 127.11167502411264),
+        marker: MarkerType.book);
+
+    // marker.loadIconImage();
+
+    markers.add(marker);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +45,9 @@ class DaisyMap extends StatelessWidget {
       height: 844.h - 58.h - 158.h,
       child: Stack(
         children: [
-          const NaverMap(),
+          NaverMap(
+            markers: markers,
+          ),
           Padding(
             padding: EdgeInsets.only(
               top: 628.h - 60.h - 64.h,

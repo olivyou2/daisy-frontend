@@ -24,6 +24,13 @@ class DaisyImages {
   static final bellImage = SvgPicture.asset("assets/images/main/bell.svg");
   static final burgerImage = SvgPicture.asset("assets/images/main/burger.svg");
 
+  static const bookMarkerImage =
+      AssetImage("assets/images/map/book_marker.png");
+  static const cultureMarkerImage =
+      AssetImage("assets/images/map/culture_marker.png");
+  static const foodMarkerImage =
+      AssetImage("assets/images/map/food_marker.png");
+
   static const Image cameraBtnImage =
       Image(image: AssetImage("assets/images/init/camera.png"));
   static const AssetImage dropdownBtnImage =

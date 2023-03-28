@@ -77,7 +77,7 @@ class _MainPageState extends State<MainPage> {
               physics: const ClampingScrollPhysics(),
               child: const TopIndicator(),
             ),
-            const DaisyMap()
+            DaisyMap()
           ],
         );
       },

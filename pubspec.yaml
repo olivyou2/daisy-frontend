@@ -81,6 +81,10 @@ flutter:
     - assets/images/main/bell.svg
     - assets/images/mock/decoration.png
 
+    - assets/images/map/food_marker.png
+    - assets/images/map/culture_marker.png
+    - assets/images/map/book_marker.png
+
     - assets/images/init/camera.png
     - assets/images/init/dropdown.png
 
