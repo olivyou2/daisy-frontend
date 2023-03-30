@@ -3,19 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainDescription extends StatefulWidget {
-  const MainDescription({super.key});
+  late String name;
+  late String description;
+
+  MainDescription({super.key, required this.name, required this.description});
 
   @override
   State<MainDescription> createState() => _MainDescriptionState();
 }
 
 class _MainDescriptionState extends State<MainDescription> {
-  String name = "김땡땡";
-
   @override
   Widget build(BuildContext context) {
+    String modifiedDescription =
+        widget.description.replaceAll(RegExp("{name}"), widget.name);
+
     return Text(
-      "$name님,\n이번 데이트는 어디가 좋을까요?",
+      modifiedDescription,
       style: TextStyle(
           fontSize: 24.sp,
           fontWeight: FontWeight.w700,

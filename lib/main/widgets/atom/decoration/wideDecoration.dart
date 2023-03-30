@@ -21,14 +21,24 @@ class _WideDecorationState extends State<WideDecoration> {
       height: 160.h,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.w)),
       child: Stack(children: [
-        // imageWidget,
         Stack(children: [
+          // Image Render
           Container(
             width: 252.w,
             height: 160.h,
-            color: ColorPalette.backGray,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(16.w)),
+            ),
+            child: const Image(
+              image: DaisyImages.decorationMockImage,
+              fit: BoxFit.fill,
+            ),
           ),
+
+          // Gradient Decoration
           Container(
+            width: 252.w,
+            height: 160.h,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(16.w)),
                 gradient: const LinearGradient(
@@ -39,6 +49,8 @@ class _WideDecorationState extends State<WideDecoration> {
                       Color.fromARGB(171, 131, 110, 214)
                     ])),
           ),
+
+          // Text Overlay
           Container(
             padding: EdgeInsets.only(top: 124.h, left: 12.w),
             child: Text(

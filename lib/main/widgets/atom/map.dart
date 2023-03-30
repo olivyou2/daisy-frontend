@@ -1,12 +1,15 @@
+import 'dart:ffi';
+
 import 'package:daisy_frontend/main/map/marker.dart';
 import 'package:daisy_frontend/util/color.dart';
-import 'package:daisy_frontend/util/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DaisyMap extends StatefulWidget {
-  const DaisyMap({super.key});
+  final Function? attachCallback;
+
+  const DaisyMap({super.key, this.attachCallback});
 
   @override
   State<DaisyMap> createState() => _DaisyMapState();
@@ -19,7 +22,6 @@ class _DaisyMapState extends State<DaisyMap> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
-        print(mounted);
         if (!mounted) return;
 
         setState(() {
@@ -47,7 +49,7 @@ class _DaisyMapState extends State<DaisyMap> {
 
       DaisyMarker marker = DaisyMarker(
           markerId: "d$i",
-          position: LatLng(37.3426329041238 + 0.001 * i, 127.11167502411264),
+          position: LatLng(37.3426329041238 + 0.002 * i, 127.11167502411264),
           marker: type);
 
       marker.loadIconImage();
@@ -64,6 +66,17 @@ class _DaisyMapState extends State<DaisyMap> {
         children: [
           NaverMap(
             markers: markers,
+            pathOverlays: {
+              PathOverlay(
+                  PathOverlayId("path1"),
+                  const [
+                    LatLng(37.3426329041238 + 0.002, 127.11167502411264),
+                    LatLng(37.3426329041238 + 0.002 + 0.002, 127.11167502411264)
+                  ],
+                  width: 2,
+                  color: ColorPalette.yellow,
+                  outlineColor: ColorPalette.white)
+            },
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -97,6 +110,6 @@ class _DaisyMapState extends State<DaisyMap> {
   }
 
   void onTabCreateMapBtn(details) {
-    print("ㅎㅇ");
+    widget.attachCallback!();
   }
 }
