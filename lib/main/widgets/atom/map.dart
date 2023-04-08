@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:daisy_frontend/main/map/marker.dart';
 import 'package:daisy_frontend/util/color.dart';
 import 'package:flutter/material.dart';

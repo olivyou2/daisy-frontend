@@ -1,16 +1,13 @@
-import 'dart:ffi';
-
 import 'package:daisy_frontend/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HalfWidthDecoration extends StatefulWidget {
-  double height;
+  final double height;
 
-  Text? overlayText;
-  Text? subOverlayText;
-  Widget? textTopWidget;
-  Widget? overlayWidget;
+  final Text? overlayText;
+  final Text? subOverlayText;
+  final Widget? textTopWidget;
 
   Color? backgroundColor;
 

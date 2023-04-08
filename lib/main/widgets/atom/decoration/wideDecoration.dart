@@ -1,8 +1,6 @@
-import 'package:daisy_frontend/util/color.dart';
 import 'package:daisy_frontend/util/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:widget_mask/widget_mask.dart';
 
 class WideDecoration extends StatefulWidget {
   const WideDecoration({super.key});

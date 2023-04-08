@@ -1,11 +1,6 @@
-import 'dart:convert';
-
 import 'package:daisy_frontend/main/widgets/molecule/courseTopIndicator.dart';
 import 'package:daisy_frontend/util/onceActivator.dart';
 import 'package:flutter/material.dart';
-
-import '../atom/map.dart';
-import 'mapTopIndicator.dart';
 
 class CourseSheetController extends ChangeNotifier {
   bool maximized = false;
