@@ -1,6 +1,7 @@
 import 'package:daisy_frontend/main/widgets/molecule/courseTopIndicator.dart';
 import 'package:daisy_frontend/util/onceActivator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CourseSheetController extends ChangeNotifier {
   bool maximized = false;
@@ -37,6 +38,7 @@ class _CourseSheetState extends State<CourseSheet> {
 
   double closePosition = 0;
   double openPosition = 0.2;
+  double fullyOpenPosition = 0.8;
 
   OnceActivator closeActivator = OnceActivator();
 
@@ -99,14 +101,14 @@ class _CourseSheetState extends State<CourseSheet> {
   @override
   Widget build(BuildContext context) {
     double minChildSize = closePosition;
-    double maxChildSize = openPosition;
+    double maxChildSize = fullyOpenPosition;
 
     return DraggableScrollableSheet(
       initialChildSize: 0,
       minChildSize: minChildSize,
       maxChildSize: maxChildSize,
       snap: true,
-      snapSizes: [closePosition, openPosition],
+      snapSizes: [closePosition, openPosition, fullyOpenPosition],
       controller: sheetController,
       builder: (BuildContext context, ScrollController scrollController) {
         return Column(
@@ -115,7 +117,7 @@ class _CourseSheetState extends State<CourseSheet> {
               controller: scrollController,
               // reverse: true,
               physics: const ClampingScrollPhysics(),
-              child: const CourseTopIndicator(),
+              child: Column(children: [const CourseTopIndicator()]),
             ),
           ],
         );
