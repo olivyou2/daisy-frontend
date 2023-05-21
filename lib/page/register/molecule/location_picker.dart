@@ -195,8 +195,8 @@ class LocationPicker extends StatefulWidget {
 }
 
 class _LocationPickerState extends State<LocationPicker> {
-  late String _state;
-  late String _city;
+  String _state = '';
+  String _city = '';
 
   showPickerModal(BuildContext context) {
     Picker(
@@ -307,10 +307,9 @@ class _LocationPickerState extends State<LocationPicker> {
         hideHeader: false,
         onConfirm: (Picker picker, List value) {
           String result = picker.adapter.text.replaceAll(RegExp(r'\[|\]'), '');
-          print(result.split(', ')[1]);
           setState(() {
-            this._state = result.split(', ')[0];
-            this._city = result.split(', ')[1];
+            _state = result.split(', ')[0];
+            _city = result.split(', ')[1];
           });
         }).showModal(context); //_scaffoldKey.currentState);
   }
@@ -338,7 +337,8 @@ class _LocationPickerState extends State<LocationPicker> {
                   _city.isNotEmpty && _state.isNotEmpty
                       ? '$_state $_city'
                       : '거주지를 선택해주세요',
-                  style: TextStyle(fontSize: 16.0, color: ColorPalette.gray2),
+                  style: const TextStyle(
+                      fontSize: 16.0, color: ColorPalette.gray2),
                 ),
                 SvgPicture.asset(
                   'assets/svgs/arrow_down.svg',
