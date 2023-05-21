@@ -1,6 +1,5 @@
-import 'package:daisy_frontend/page/init/init.dart';
-import 'package:daisy_frontend/page/login/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:daisy_frontend/page/register/register.dart';
 
@@ -20,6 +19,15 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('ko'),
+            Locale('en'),
+          ],
           debugShowCheckedModeBanner: false,
           title: "Daisy",
           // You can use the library anywhere in the app even in theme

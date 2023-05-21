@@ -48,7 +48,10 @@ class _DatePickerState extends State<DatePicker> {
           child: TextButton(
             onPressed: () => _showDialog(
               CupertinoDatePicker(
+                dateOrder: DatePickerDateOrder.ymd,
                 initialDateTime: date,
+                maximumDate: date,
+                maximumYear: date.year,
                 mode: CupertinoDatePickerMode.date,
                 use24hFormat: true,
                 onDateTimeChanged: (DateTime newDate) {
