@@ -2,9 +2,8 @@ import 'package:daisy_frontend/main/widgets/atom/decoration/halfWidthDecoration.
 import 'package:daisy_frontend/main/widgets/atom/decoration/wideDecoration.dart';
 import 'package:daisy_frontend/main/widgets/atom/description.dart';
 import 'package:daisy_frontend/main/widgets/atom/map.dart';
-import 'package:daisy_frontend/main/widgets/molecule/mainTopIndicator.dart';
-import 'package:daisy_frontend/main/widgets/molecule/mapSheet.dart';
-import 'package:daisy_frontend/main/widgets/molecule/mapTopIndicator.dart';
+import 'package:daisy_frontend/main/widgets/molecule/main/mainTopIndicator.dart';
+import 'package:daisy_frontend/main/widgets/molecule/map/mapSheet.dart';
 import 'package:daisy_frontend/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

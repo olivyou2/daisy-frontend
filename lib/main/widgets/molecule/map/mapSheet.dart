@@ -1,8 +1,20 @@
-import 'package:daisy_frontend/main/widgets/molecule/courseSheet.dart';
+import 'package:daisy_frontend/main/widgets/molecule/course/courseSheet.dart';
+import 'package:daisy_frontend/main/widgets/molecule/path/pathSheet.dart';
 import 'package:flutter/material.dart';
 
-import '../atom/map.dart';
+import '../../atom/map.dart';
 import 'mapTopIndicator.dart';
+
+class MapMenuController extends ChangeNotifier {
+  int menuState = 0;
+
+  setMenu(int menu) {
+    menuState = menu;
+    notifyListeners();
+
+    print("asdf");
+  }
+}
 
 class MapSheet extends StatefulWidget {
   const MapSheet({super.key});
@@ -23,6 +35,7 @@ class _MapSheetState extends State<MapSheet> {
 
   DraggableScrollableController controller = DraggableScrollableController();
   CourseSheetController courseSheetController = CourseSheetController();
+  MapMenuController mapMenuController = MapMenuController();
 
   bool maximized = false;
 
@@ -97,6 +110,15 @@ class _MapSheetState extends State<MapSheet> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    mapMenuController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     List<double> snaps = maximized ? maximizeSnap : defaultSnap;
 
@@ -116,10 +138,13 @@ class _MapSheetState extends State<MapSheet> {
 
     return Stack(children: [
       _sheet(snaps, initialChildSize, minChildSize, maxChildSize),
-      CourseSheet(
-        controller: courseSheetController,
-        mapSheetDetatchCallback: () => _deattach(),
-      )
+      mapMenuController.menuState == 0
+          ? CourseSheet(
+              controller: courseSheetController,
+              menuController: mapMenuController,
+              mapSheetDetatchCallback: () => _deattach(),
+            )
+          : PathSheet()
     ]);
   }
 

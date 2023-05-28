@@ -5,8 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../util/color.dart';
-
 class MapTopIndicator extends StatelessWidget {
   const MapTopIndicator({
     super.key,

@@ -1,10 +1,21 @@
-import 'package:daisy_frontend/main/widgets/molecule/courseTopIndicator.dart';
+import 'package:daisy_frontend/main/widgets/molecule/course/courseTopIndicator.dart';
+import 'package:daisy_frontend/main/widgets/molecule/map/mapSheet.dart';
 import 'package:daisy_frontend/util/onceActivator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CourseSheetController extends ChangeNotifier {
   bool maximized = false;
+  double height = 400.h;
+
+  void setHeight(double height) {
+    this.height = height;
+    notifyListeners();
+  }
+
+  double getHeightRatio(BuildContext context) {
+    return height / MediaQuery.of(context).size.height;
+  }
 
   void open() {
     maximized = true;
@@ -19,12 +30,14 @@ class CourseSheetController extends ChangeNotifier {
 
 class CourseSheet extends StatefulWidget {
   final CourseSheetController controller;
+  final MapMenuController menuController;
   final Function mapSheetDetatchCallback;
 
   const CourseSheet(
       {super.key,
       required this.controller,
-      required this.mapSheetDetatchCallback});
+      required this.mapSheetDetatchCallback,
+      required this.menuController});
 
   @override
   State<CourseSheet> createState() => _CourseSheetState();
@@ -37,8 +50,6 @@ class _CourseSheetState extends State<CourseSheet> {
       DraggableScrollableController();
 
   double closePosition = 0;
-  double openPosition = 0.2;
-  double fullyOpenPosition = 0.8;
 
   OnceActivator closeActivator = OnceActivator();
 
@@ -48,7 +59,7 @@ class _CourseSheetState extends State<CourseSheet> {
       closeActivator.deactivate();
 
       sheetController
-          .animateTo(openPosition,
+          .animateTo(widget.controller.getHeightRatio(context),
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut)
           .then((value) {
@@ -101,14 +112,14 @@ class _CourseSheetState extends State<CourseSheet> {
   @override
   Widget build(BuildContext context) {
     double minChildSize = closePosition;
-    double maxChildSize = fullyOpenPosition;
+    double maxChildSize = widget.controller.getHeightRatio(context);
 
     return DraggableScrollableSheet(
       initialChildSize: 0,
       minChildSize: minChildSize,
       maxChildSize: maxChildSize,
       snap: true,
-      snapSizes: [closePosition, openPosition, fullyOpenPosition],
+      snapSizes: [minChildSize, maxChildSize],
       controller: sheetController,
       builder: (BuildContext context, ScrollController scrollController) {
         return Column(
@@ -117,7 +128,12 @@ class _CourseSheetState extends State<CourseSheet> {
               controller: scrollController,
               // reverse: true,
               physics: const ClampingScrollPhysics(),
-              child: Column(children: [const CourseTopIndicator()]),
+              child: Column(children: [
+                CourseTopIndicator(
+                  sheetController: widget.controller,
+                  mapMenuController: widget.menuController,
+                )
+              ]),
             ),
           ],
         );
