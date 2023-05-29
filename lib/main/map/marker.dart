@@ -9,7 +9,10 @@ class DaisyMarker extends Marker {
   late MarkerType marker;
 
   DaisyMarker(
-      {required super.markerId, required super.position, required this.marker});
+      {required super.markerId,
+      required super.position,
+      required this.marker,
+      required super.onMarkerTab});
 
   Future<void> loadIconImage() async {
     OverlayImage? image;

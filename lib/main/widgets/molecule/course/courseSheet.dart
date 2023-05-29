@@ -33,7 +33,9 @@ class CourseSheet extends StatefulWidget {
   final MapMenuController menuController;
   final Function mapSheetDetatchCallback;
 
-  const CourseSheet(
+  late State<CourseSheet> states;
+
+  CourseSheet(
       {super.key,
       required this.controller,
       required this.mapSheetDetatchCallback,
@@ -86,6 +88,14 @@ class _CourseSheetState extends State<CourseSheet> {
     });
   }
 
+  _windowEvent() {
+    if (widget.controller.maximized) {
+      _open();
+    } else {
+      _close();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -100,13 +110,13 @@ class _CourseSheetState extends State<CourseSheet> {
       }
     });
 
-    widget.controller.addListener(() {
-      if (widget.controller.maximized) {
-        _open();
-      } else {
-        _close();
-      }
-    });
+    widget.controller.addListener(_windowEvent);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.controller.removeListener(_windowEvent);
   }
 
   @override

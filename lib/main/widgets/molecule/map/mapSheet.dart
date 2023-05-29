@@ -1,9 +1,44 @@
 import 'package:daisy_frontend/main/widgets/molecule/course/courseSheet.dart';
 import 'package:daisy_frontend/main/widgets/molecule/path/pathSheet.dart';
+import 'package:daisy_frontend/main/widgets/molecule/path/pathSheetIndicator.dart';
+import 'package:daisy_frontend/util/remoteActivator.dart';
 import 'package:flutter/material.dart';
 
 import '../../atom/map.dart';
 import 'mapTopIndicator.dart';
+
+class MapPlaceController extends ChangeNotifier {
+  late PathUnit? path;
+  late bool placeOpened = false;
+
+  setPath(PathUnit path) {
+    this.path = path;
+    this.placeOpened = true;
+
+    notifyListeners();
+  }
+
+  setEmpty() {
+    this.path = null;
+    this.placeOpened = false;
+
+    notifyListeners();
+  }
+}
+
+class MapSheetController extends RemoteActivator {
+  attach() {
+    activate("attach");
+  }
+
+  deattach() {
+    activate("deattach");
+  }
+
+  close() {
+    activate("close");
+  }
+}
 
 class MapMenuController extends ChangeNotifier {
   int menuState = 0;
@@ -11,8 +46,6 @@ class MapMenuController extends ChangeNotifier {
   setMenu(int menu) {
     menuState = menu;
     notifyListeners();
-
-    print("asdf");
   }
 }
 
@@ -35,7 +68,10 @@ class _MapSheetState extends State<MapSheet> {
 
   DraggableScrollableController controller = DraggableScrollableController();
   CourseSheetController courseSheetController = CourseSheetController();
+
   MapMenuController mapMenuController = MapMenuController();
+  MapSheetController mapSheetController = MapSheetController();
+  MapPlaceController mapPlaceController = MapPlaceController();
 
   bool maximized = false;
 
@@ -116,6 +152,18 @@ class _MapSheetState extends State<MapSheet> {
     mapMenuController.addListener(() {
       setState(() {});
     });
+
+    mapSheetController.listen("close", () {
+      _close();
+    });
+
+    mapSheetController.listen("deattach", () {
+      _deattach();
+    });
+
+    mapPlaceController.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -138,13 +186,24 @@ class _MapSheetState extends State<MapSheet> {
 
     return Stack(children: [
       _sheet(snaps, initialChildSize, minChildSize, maxChildSize),
-      mapMenuController.menuState == 0
-          ? CourseSheet(
-              controller: courseSheetController,
-              menuController: mapMenuController,
-              mapSheetDetatchCallback: () => _deattach(),
-            )
-          : PathSheet()
+      mapPlaceController.placeOpened
+          ? const SizedBox()
+          : (mapMenuController.menuState == 0
+              ? CourseSheet(
+                  controller: courseSheetController,
+                  menuController: mapMenuController,
+                  mapSheetDetatchCallback: () => _deattach(),
+                )
+              : PathSheet(
+                  mapSheetController: mapSheetController,
+                  mapMenuController: mapMenuController,
+                )),
+      !mapPlaceController.placeOpened
+          ? const SizedBox()
+          : Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.black.withOpacity(0.5)),
     ]);
   }
 
@@ -166,6 +225,8 @@ class _MapSheetState extends State<MapSheet> {
               child: const MapTopIndicator(),
             ),
             DaisyMap(
+              mapMenuController: mapMenuController,
+              mapPlaceController: mapPlaceController,
               attachCallback: () {
                 _debugAttach();
               },

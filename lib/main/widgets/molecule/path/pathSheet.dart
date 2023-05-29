@@ -1,8 +1,25 @@
+import 'package:daisy_frontend/main/widgets/molecule/map/mapSheet.dart';
 import 'package:daisy_frontend/main/widgets/molecule/path/pathSheetIndicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class PathController extends ChangeNotifier {
+  double height = 0;
+
+  setHeigth(double newHeight) {
+    height = newHeight;
+    notifyListeners();
+  }
+}
 
 class PathSheet extends StatefulWidget {
-  const PathSheet({super.key});
+  final MapSheetController mapSheetController;
+  final MapMenuController mapMenuController;
+
+  const PathSheet(
+      {super.key,
+      required this.mapSheetController,
+      required this.mapMenuController});
 
   @override
   State<PathSheet> createState() => _PathSheetState();
@@ -14,7 +31,7 @@ class _PathSheetState extends State<PathSheet> {
   DraggableScrollableController sheetController =
       DraggableScrollableController();
 
-  double closePosition = 0.4;
+  double closePosition = 0.1;
 
   @override
   void initState() {
@@ -24,10 +41,12 @@ class _PathSheetState extends State<PathSheet> {
   @override
   Widget build(BuildContext context) {
     double minChildSize = closePosition;
-    double maxChildSize = 0.5;
+
+    // set maxChildSize into scale by 786
+    double maxChildSize = 786.h / MediaQuery.of(context).size.height;
 
     return DraggableScrollableSheet(
-      initialChildSize: 0.5,
+      initialChildSize: maxChildSize,
       minChildSize: minChildSize,
       maxChildSize: maxChildSize,
       snap: true,
@@ -40,7 +59,11 @@ class _PathSheetState extends State<PathSheet> {
               controller: scrollController,
               // reverse: true,
               physics: const ClampingScrollPhysics(),
-              child: Column(children: const [PathTopIndicator()]),
+              child: Column(children: [
+                PathTopIndicator(
+                    mapSheetController: widget.mapSheetController,
+                    mapMenuController: widget.mapMenuController)
+              ]),
             ),
           ],
         );
