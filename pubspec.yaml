@@ -46,6 +46,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+  flutter_naver_map: 0.10.7
+  indexed: ^0.0.8
+  widget_mask: ^1.0.0+0
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +79,15 @@ flutter:
     - assets/images/login/clicked_google.svg
     - assets/images/login/clicked_kakao.svg
     - assets/images/login/clicked_naver.svg
+    - assets/images/map/search.svg
+    - assets/images/map/delete.svg
+    - assets/images/main/burger.svg
+    - assets/images/main/bell.svg
+    - assets/images/mock/decoration.png
+
+    - assets/images/map/food_marker.png
+    - assets/images/map/culture_marker.png
+    - assets/images/map/book_marker.png
 
     - assets/images/init/camera.png
     - assets/images/init/dropdown.png
