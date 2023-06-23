@@ -1,4 +1,6 @@
 import 'package:daisy_frontend/main/map/marker.dart';
+import 'package:daisy_frontend/main/widgets/molecule/map/mapSheet.dart';
+import 'package:daisy_frontend/main/widgets/molecule/place/place.dart';
 import 'package:daisy_frontend/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
@@ -6,8 +8,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DaisyMap extends StatefulWidget {
   final Function? attachCallback;
+  final MapMenuController mapMenuController;
+  final MapPlaceController mapPlaceController;
 
-  const DaisyMap({super.key, this.attachCallback});
+  const DaisyMap(
+      {super.key,
+      this.attachCallback,
+      required this.mapMenuController,
+      required this.mapPlaceController});
 
   @override
   State<DaisyMap> createState() => _DaisyMapState();
@@ -15,6 +23,9 @@ class DaisyMap extends StatefulWidget {
 
 class _DaisyMapState extends State<DaisyMap> {
   final markers = <Marker>[];
+
+  bool buttonShow = false;
+  bool placeShow = true;
 
   @override
   void initState() {
@@ -48,7 +59,10 @@ class _DaisyMapState extends State<DaisyMap> {
       DaisyMarker marker = DaisyMarker(
           markerId: "d$i",
           position: LatLng(37.3426329041238 + 0.002 * i, 127.11167502411264),
-          marker: type);
+          marker: type,
+          onMarkerTab: (details, some) {
+            print(details?.captionText);
+          });
 
       marker.loadIconImage();
 
@@ -64,6 +78,10 @@ class _DaisyMapState extends State<DaisyMap> {
         children: [
           NaverMap(
             markers: markers,
+            onSymbolTap: (position, caption) {
+              print("onSymbolTap");
+              print(caption);
+            },
             pathOverlays: {
               PathOverlay(
                   PathOverlayId("path1"),
@@ -76,32 +94,48 @@ class _DaisyMapState extends State<DaisyMap> {
                   outlineColor: ColorPalette.white)
             },
           ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: 628.h - 60.h - 64.h,
-            ),
-            child: Center(
-              child: GestureDetector(
-                onTapUp: onTabCreateMapBtn,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: ColorPalette.yello,
-                      borderRadius: BorderRadius.all(Radius.circular(30.w))),
-                  width: 259.w,
-                  height: 60.h,
+          buttonShow
+              ? Padding(
+                  padding: EdgeInsets.only(
+                    top: 628.h - 60.h - 64.h,
+                  ),
                   child: Center(
-                    child: Text(
-                      "데이트 지도 만들기",
-                      style: TextStyle(
-                          color: ColorPalette.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20.sp),
+                    child: GestureDetector(
+                      onTapUp: onTabCreateMapBtn,
+                      child: widget.mapMenuController.menuState == 1
+                          ? null
+                          : Container(
+                              decoration: BoxDecoration(
+                                  color: ColorPalette.yello,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.w))),
+                              width: 259.w,
+                              height: 60.h,
+                              child: Center(
+                                child: Text(
+                                  "데이트 지도 만들기",
+                                  style: TextStyle(
+                                      color: ColorPalette.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 20.sp),
+                                ),
+                              ),
+                            ),
                     ),
                   ),
-                ),
-              ),
-            ),
-          )
+                )
+              : const SizedBox(),
+          placeShow
+              ? Padding(
+                  padding: EdgeInsets.only(
+                    top: 628.h - 166.h - 100.h,
+                  ),
+                  child: const Center(
+                      child: PlaceWidget(
+                    clickable: false,
+                  )),
+                )
+              : const SizedBox(),
         ],
       ),
     );

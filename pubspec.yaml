@@ -42,13 +42,14 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   jwt_decoder: ^2.0.1
   flutter_svg: ^2.0.3
+  flutter_naver_map: 0.10.7
+  indexed: ^0.0.8
+  widget_mask: ^1.0.0+0
+  riverpod: ^2.3.6
   flutter_picker: ^2.1.0
   flutter_localizations:
     sdk: flutter
   intl: any
-  flutter_naver_map: 0.10.7
-  indexed: ^0.0.8
-  widget_mask: ^1.0.0+0
   word_break_text: ^0.1.0
 
 dev_dependencies:

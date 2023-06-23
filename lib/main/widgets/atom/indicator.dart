@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -5,13 +7,17 @@ import '../../../util/color.dart';
 
 class Indicator extends StatelessWidget {
   final List<Widget> children;
-  const Indicator({super.key, required this.children});
+  late double? height = 158.h;
+
+  Indicator({super.key, required this.children, this.height}) {
+    height ??= 158.h;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 390.w,
-      height: 158.h,
+      height: height,
       decoration: BoxDecoration(
           color: ColorPalette.white,
           boxShadow: const [

@@ -83,14 +83,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_picker:
-    dependency: "direct main"
-    description:
-      name: flutter_picker
-      sha256: "2f94c6eefba8697b07e3cd008b75f06b4ba7053cb26d23ae0fcd5932b7dc75af"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   flutter_naver_map:
     dependency: "direct main"
     description:
@@ -99,6 +91,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.7"
+  flutter_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_picker
+      sha256: "2f94c6eefba8697b07e3cd008b75f06b4ba7053cb26d23ae0fcd5932b7dc75af"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -205,14 +205,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  intl:
-    dependency: "direct main"
-    description:
-      name: intl
-      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.17.0"
   indexed:
     dependency: "direct main"
     description:
@@ -221,6 +213,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.8"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.0"
   js:
     dependency: transitive
     description:
@@ -301,6 +301,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  riverpod:
+    dependency: "direct main"
+    description:
+      name: riverpod
+      sha256: "80e48bebc83010d5e67a11c9514af6b44bbac1ec77b4333c8ea65dbc79e2d8ef"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.6"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -322,6 +330,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  state_notifier:
+    dependency: transitive
+    description:
+      name: state_notifier
+      sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.2+1"
   stream_channel:
     dependency: transitive
     description:
