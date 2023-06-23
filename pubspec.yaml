@@ -49,6 +49,7 @@ dependencies:
   flutter_naver_map: 0.10.7
   indexed: ^0.0.8
   widget_mask: ^1.0.0+0
+  word_break_text: ^0.1.0
 
 dev_dependencies:
   flutter_test:
