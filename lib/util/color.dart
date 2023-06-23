@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ColorPalette {
+  ColorPalette._(); // 인스턴스화 방지
+
   static const Color darkGray = Color(0xff626364);
   static const Color gray = Color(0xff8d8d8d);
   static const Color gray2 = Color(0xffb4b4b4);

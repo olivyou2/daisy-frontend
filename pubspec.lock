@@ -78,6 +78,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_naver_map:
     dependency: "direct main"
     description:
@@ -86,6 +91,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.7"
+  flutter_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_picker
+      sha256: "2f94c6eefba8697b07e3cd008b75f06b4ba7053cb26d23ae0fcd5932b7dc75af"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -200,6 +213,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.8"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.0"
   js:
     dependency: transitive
     description:
@@ -469,6 +490,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.3"
+  word_break_text:
+    dependency: "direct main"
+    description:
+      name: word_break_text
+      sha256: "232b5d949f8c9279b8addc1478f04b1de1867eb53ab2925caa70f5cf03a97d5a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   xml:
     dependency: transitive
     description:
