@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:daisy_frontend/main/screens/main.dart';
 import 'package:daisy_frontend/util/color.dart';
 import 'package:daisy_frontend/util/image.dart';
@@ -17,10 +19,6 @@ class _FriendPageWidgetState extends State<FriendPageWidget> {
   bool friendConnected = false;
   String myName = "박원호";
   String friendName = "박진아";
-
-  closeCallback(details) {
-    widget.pageNavigateController.pageClose();
-  }
 
   _renderIcon() {
     if (friendConnected) {
@@ -150,56 +148,99 @@ class _FriendPageWidgetState extends State<FriendPageWidget> {
     );
   }
 
+  bool animation = false;
+  bool close = false;
+
+  final bool closeAnimationMode = true;
+
+  closeCallback(details) {
+    if (!closeAnimationMode) {
+      widget.pageNavigateController.pageClose();
+    }
+
+    if (closeAnimationMode) {
+      setState(() {
+        close = true;
+        animation = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    Timer.run(
+      () {
+        setState(() {
+          animation = true;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 390.w,
-      height: 844.h,
-      decoration: const BoxDecoration(color: ColorPalette.white),
-      child: Center(
-        child: SizedBox(
-          width: 350.w,
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(padding: EdgeInsets.only(top: 83.h)),
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOutCirc,
+      right: animation ? 0 : -390.w,
+      onEnd: () {
+        if (close) {
+          setState(() {
+            widget.pageNavigateController.pageClose();
+          });
+        }
+      },
+      child: Container(
+        width: 390.w,
+        height: 844.h,
+        decoration: const BoxDecoration(color: ColorPalette.white),
+        child: Center(
+          child: SizedBox(
+            width: 350.w,
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Padding(padding: EdgeInsets.only(top: 83.h)),
 
-            // 상단 인디케이터
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                GestureDetector(
-                    onTapUp: closeCallback, child: DaisyImages.menuPrevImage),
-              ],
-            ),
+              // 상단 인디케이터
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                      onTapUp: closeCallback, child: DaisyImages.menuPrevImage),
+                ],
+              ),
 
-            Padding(padding: EdgeInsets.only(top: 40.sp)),
+              Padding(padding: EdgeInsets.only(top: 40.sp)),
 
-            _renderIcon(),
+              _renderIcon(),
 
-            Padding(padding: EdgeInsets.only(top: 40.sp)),
+              Padding(padding: EdgeInsets.only(top: 40.sp)),
 
-            const Divider(
-              thickness: 1,
-              height: 1,
-              color: ColorPalette.gray4,
-            ),
-            Padding(padding: EdgeInsets.only(top: 28.sp)),
+              const Divider(
+                thickness: 1,
+                height: 1,
+                color: ColorPalette.gray4,
+              ),
+              Padding(padding: EdgeInsets.only(top: 28.sp)),
 
-            _renderBtn(),
+              _renderBtn(),
 
-            Padding(padding: EdgeInsets.only(top: 28.sp)),
+              Padding(padding: EdgeInsets.only(top: 28.sp)),
 
-            const Divider(
-              thickness: 1,
-              height: 1,
-              color: ColorPalette.gray4,
-            ),
+              const Divider(
+                thickness: 1,
+                height: 1,
+                color: ColorPalette.gray4,
+              ),
 
-            Padding(padding: EdgeInsets.only(top: 355.sp)),
+              Padding(padding: EdgeInsets.only(top: 355.sp)),
 
-            _renderDescription()
-          ]),
+              _renderDescription()
+            ]),
+          ),
         ),
       ),
     );

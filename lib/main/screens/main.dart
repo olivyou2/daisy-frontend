@@ -24,6 +24,9 @@ class MainPage extends StatefulWidget {
 class PageNavigateController extends RemoteActivator {
   late String pageName;
 
+  bool navigateAnimationDone = true;
+  bool pageOpened = false;
+
   listenPageOpen(Function callback) {
     listen("open", () {
       callback();
@@ -41,11 +44,23 @@ class PageNavigateController extends RemoteActivator {
   }
 
   pageOpen() {
+    navigateAnimationStart();
+    pageOpened = true;
     activate("open");
   }
 
   pageClose() {
+    navigateAnimationStart();
+    pageOpened = false;
     activate("close");
+  }
+
+  navigateAnimationStart() {
+    navigateAnimationDone = false;
+  }
+
+  navigateAnimationEnd() {
+    navigateAnimationDone = true;
   }
 }
 
@@ -77,6 +92,7 @@ class _MainPageState extends State<MainPage> {
         pageOpened = true;
       });
     });
+
     pageNavigateController.listenPageClose(() {
       setState(() {
         pageOpened = false;
@@ -107,12 +123,10 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
         const MapSheet(),
-        menuOpened
-            ? MenuWidget(
-                menuController: menuController,
-                pageNavigateController: pageNavigateController,
-              )
-            : const SizedBox(),
+        MenuWidget(
+          menuController: menuController,
+          pageNavigateController: pageNavigateController,
+        ),
         _renderPage()
       ]),
     );

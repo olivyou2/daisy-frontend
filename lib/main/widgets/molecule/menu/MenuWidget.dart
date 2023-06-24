@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MenuWidgetController extends RemoteActivator {
+  bool state = false;
+  bool menuPositionAnimationDone = true;
+
   listenOpenEvent(Function open) {
     listen("open", () {
       open();
@@ -20,11 +23,23 @@ class MenuWidgetController extends RemoteActivator {
   }
 
   close() {
+    state = false;
+    menuPositionAnimationStart();
     activate("close");
   }
 
   open() {
+    state = true;
+    menuPositionAnimationStart();
     activate("open");
+  }
+
+  menuPositionAnimationStart() {
+    menuPositionAnimationDone = false;
+  }
+
+  menuPositionAnimationEnd() {
+    menuPositionAnimationDone = true;
   }
 }
 
@@ -55,79 +70,97 @@ class _MenuWidgetState extends State<MenuWidget> {
     return Stack(
       alignment: Alignment.centerRight,
       children: [
-        GestureDetector(
-          onTapUp: backgroundTouched,
-          child: Container(
-            width: 390.w,
-            height: 844.h,
-            decoration:
-                const BoxDecoration(color: Color.fromARGB(200, 0, 0, 0)),
+        Positioned(
+          right: widget.menuController.state ||
+                  !widget.menuController.menuPositionAnimationDone
+              ? 0
+              : -390.w,
+          child: AnimatedOpacity(
+            opacity: widget.menuController.state ? 1 : 0,
+            duration: const Duration(milliseconds: 200),
+            child: GestureDetector(
+              onTapUp: backgroundTouched,
+              child: Container(
+                width: 390.w,
+                height: 844.h,
+                decoration:
+                    const BoxDecoration(color: Color.fromARGB(200, 0, 0, 0)),
+              ),
+            ),
           ),
         ),
-        Container(
-          width: 310.w,
-          height: 844.h,
-          decoration: const BoxDecoration(color: ColorPalette.white),
-          child: Center(
-            child: SizedBox(
-              width: 260.w,
-              child: Column(children: [
-                Padding(padding: EdgeInsets.only(top: 83.h)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTapUp: closeBtnTouched,
-                      child: DaisyImages.closeImage,
-                    ),
-                  ],
-                ),
-                Padding(padding: EdgeInsets.only(top: 40.h)),
-                MenuBtnWidget(
-                  menuName: "내 정보",
-                  openCallback: () {
-                    widget.pageNavigateController.changePage("info");
-                    widget.pageNavigateController.pageOpen();
+        AnimatedPositioned(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOutCirc,
+          onEnd: () {
+            setState(() {
+              widget.menuController.menuPositionAnimationEnd();
+            });
+          },
+          right: widget.menuController.state ? 0 : -390.w,
+          child: Container(
+            width: 310.w,
+            height: 844.h,
+            decoration: const BoxDecoration(color: ColorPalette.white),
+            child: Center(
+              child: SizedBox(
+                width: 260.w,
+                child: Column(children: [
+                  Padding(padding: EdgeInsets.only(top: 83.h)),
 
-                    widget.menuController.close();
-                  },
-                ),
-                // 친구 등록
-                MenuBtnWidget(
-                  menuName: "친구 등록",
-                  openCallback: () {
-                    widget.pageNavigateController.changePage("friend");
-                    widget.pageNavigateController.pageOpen();
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTapUp: closeBtnTouched,
+                        child: DaisyImages.closeImage,
+                      ),
+                    ],
+                  ),
 
-                    widget.menuController.close();
-                  },
-                ),
-                // 계정 정보
-                MenuBtnWidget(
-                  menuName: "계정 정보",
-                  openCallback: () {
-                    widget.pageNavigateController.changePage("account");
-                    widget.pageNavigateController.pageOpen();
+                  Padding(padding: EdgeInsets.only(top: 40.h)),
 
-                    widget.menuController.close();
-                  },
-                ),
-                // 설정
-                MenuBtnWidget(
-                  menuName: "설정",
-                  openCallback: () {
-                    widget.pageNavigateController.changePage("setting");
-                    widget.pageNavigateController.pageOpen();
+                  MenuBtnWidget(
+                    menuName: "내 정보",
+                    openCallback: () {
+                      widget.pageNavigateController.changePage("info");
+                      widget.pageNavigateController.pageOpen();
+                    },
+                  ),
 
-                    widget.menuController.close();
-                  },
-                ),
-                const Divider(
-                  thickness: 1,
-                  height: 1,
-                  color: ColorPalette.gray4,
-                ),
-              ]),
+                  // 친구 등록
+                  MenuBtnWidget(
+                    menuName: "친구 등록",
+                    openCallback: () {
+                      widget.pageNavigateController.changePage("friend");
+                      widget.pageNavigateController.pageOpen();
+                    },
+                  ),
+                  // 계정 정보
+                  MenuBtnWidget(
+                    menuName: "계정 정보",
+                    openCallback: () {
+                      setState(() {
+                        widget.pageNavigateController.changePage("account");
+                        widget.pageNavigateController.pageOpen();
+                      });
+                    },
+                  ),
+                  // 설정
+                  MenuBtnWidget(
+                    menuName: "설정",
+                    openCallback: () {
+                      widget.pageNavigateController.changePage("setting");
+                      widget.pageNavigateController.pageOpen();
+                    },
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    height: 1,
+                    color: ColorPalette.gray4,
+                  ),
+                ]),
+              ),
             ),
           ),
         )
