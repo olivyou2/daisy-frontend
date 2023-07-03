@@ -1,13 +1,16 @@
+import 'package:daisy_frontend/main/screens/page/account.dart';
+import 'package:daisy_frontend/main/screens/page/friends.dart';
+import 'package:daisy_frontend/main/screens/page/myinfo.dart';
+import 'package:daisy_frontend/main/screens/page/setting.dart';
 import 'package:daisy_frontend/main/widgets/atom/decoration/halfWidthDecoration.dart';
 import 'package:daisy_frontend/main/widgets/atom/decoration/wideDecoration.dart';
 import 'package:daisy_frontend/main/widgets/atom/description.dart';
 import 'package:daisy_frontend/main/widgets/atom/map.dart';
 import 'package:daisy_frontend/main/widgets/molecule/main/mainTopIndicator.dart';
 import 'package:daisy_frontend/main/widgets/molecule/map/mapSheet.dart';
-import 'package:daisy_frontend/main/widgets/molecule/mainTopIndicator.dart';
-import 'package:daisy_frontend/main/widgets/molecule/mapSheet.dart';
-import 'package:daisy_frontend/main/widgets/molecule/mapTopIndicator.dart';
+import 'package:daisy_frontend/main/widgets/molecule/menu/MenuWidget.dart';
 import 'package:daisy_frontend/util/color.dart';
+import 'package:daisy_frontend/util/remoteActivator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,8 +21,87 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
+class PageNavigateController extends RemoteActivator {
+  late String pageName;
+
+  bool navigateAnimationDone = true;
+  bool pageOpened = false;
+
+  listenPageOpen(Function callback) {
+    listen("open", () {
+      callback();
+    });
+  }
+
+  listenPageClose(Function callback) {
+    listen("close", () {
+      callback();
+    });
+  }
+
+  changePage(String pageName) {
+    this.pageName = pageName;
+  }
+
+  pageOpen() {
+    navigateAnimationStart();
+    pageOpened = true;
+    activate("open");
+  }
+
+  pageClose() {
+    navigateAnimationStart();
+    pageOpened = false;
+    activate("close");
+  }
+
+  navigateAnimationStart() {
+    navigateAnimationDone = false;
+  }
+
+  navigateAnimationEnd() {
+    navigateAnimationDone = true;
+  }
+}
+
 class _MainPageState extends State<MainPage> {
   final combineWidth = 390.w - 47.w;
+
+  final MenuWidgetController menuController = MenuWidgetController();
+  final PageNavigateController pageNavigateController =
+      PageNavigateController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    menuController.listenOpenEvent(() {
+      setState(() {
+        menuOpened = true;
+      });
+    });
+
+    menuController.listenCloseEvent(() {
+      setState(() {
+        menuOpened = false;
+      });
+    });
+
+    pageNavigateController.listenPageOpen(() {
+      setState(() {
+        pageOpened = true;
+      });
+    });
+
+    pageNavigateController.listenPageClose(() {
+      setState(() {
+        pageOpened = false;
+      });
+    });
+  }
+
+  bool menuOpened = false;
+  bool pageOpened = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +112,45 @@ class _MainPageState extends State<MainPage> {
           children: [
             Center(
                 child: SizedBox(
-                    width: combineWidth, child: const MainTopIndicator())),
+                    width: combineWidth,
+                    child: MainTopIndicator(
+                      menuController: menuController,
+                    ))),
             Padding(padding: EdgeInsets.only(top: 40.h)),
             _buildDecorationSet(),
             Padding(padding: EdgeInsets.only(top: 40.h)),
             _buildBottomDecorationSet()
           ],
         ),
-        MapSheet()
+        const MapSheet(),
+        MenuWidget(
+          menuController: menuController,
+          pageNavigateController: pageNavigateController,
+        ),
+        _renderPage()
       ]),
     );
+  }
+
+  Widget _renderPage() {
+    if (pageOpened) {
+      if (pageNavigateController.pageName == "info") {
+        return MyInfoPageWidget(
+          pageNavigateController: pageNavigateController,
+        );
+      } else if (pageNavigateController.pageName == "friend") {
+        return FriendPageWidget(pageNavigateController: pageNavigateController);
+      } else if (pageNavigateController.pageName == "account") {
+        return AccountPageWidget(
+            pageNavigateController: pageNavigateController);
+      } else if (pageNavigateController.pageName == "setting") {
+        return SettingPageWidget(
+          pageNavigateController: pageNavigateController,
+        );
+      }
+    }
+
+    return const SizedBox();
   }
 
   Widget _buildBottomDecorationSet() {

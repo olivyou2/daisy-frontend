@@ -4,9 +4,11 @@ class ColorPalette {
   ColorPalette._(); // 인스턴스화 방지
 
   static const Color darkGray = Color(0xff626364);
-  static const Color gray = Color(0xff8d8d8d);
+  // static const Color gray = Color(0xff8d8d8d);
+  static const Color gray = Color.fromARGB(255, 98, 99, 100);
   static const Color gray2 = Color(0xffb4b4b4);
   static const Color gray3 = Color(0xff626364);
+  static const Color gray4 = Color.fromARGB(255, 221, 221, 221);
   static const Color backGray = Color(0xfff9f9fB);
 
   static const Color black = Color(0xff000000);

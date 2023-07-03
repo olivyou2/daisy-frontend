@@ -1,10 +1,12 @@
 import 'package:daisy_frontend/main/widgets/atom/profileImage.dart';
+import 'package:daisy_frontend/main/widgets/molecule/menu/MenuWidget.dart';
 import 'package:daisy_frontend/util/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainTopIndicator extends StatefulWidget {
-  const MainTopIndicator({super.key});
+  final MenuWidgetController menuController;
+  const MainTopIndicator({super.key, required this.menuController});
 
   @override
   State<MainTopIndicator> createState() => _MainTopIndicatorState();
@@ -34,7 +36,9 @@ class _MainTopIndicatorState extends State<MainTopIndicator> {
                   IconButton(
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
-                      onPressed: () {},
+                      onPressed: () {
+                        widget.menuController.open();
+                      },
                       icon: DaisyImages.burgerImage)
                 ],
               ),

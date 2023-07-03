@@ -79,7 +79,6 @@ class _DaisyMapState extends State<DaisyMap> {
           NaverMap(
             markers: markers,
             onSymbolTap: (position, caption) {
-              print("onSymbolTap");
               print(caption);
             },
             pathOverlays: {

@@ -83,8 +83,11 @@ flutter:
     - assets/images/login/clicked_naver.svg
     - assets/images/map/search.svg
     - assets/images/map/delete.svg
+    - assets/images/main/del.svg
     - assets/images/main/burger.svg
     - assets/images/main/bell.svg
+    - assets/images/main/menu_goto.svg
+    - assets/images/main/menu_prev.svg
     - assets/images/mock/decoration.png
 
     - assets/images/map/food_marker.png
@@ -99,6 +102,9 @@ flutter:
     - assets/svgs/kakao.svg
     - assets/svgs/naver.svg
     - assets/svgs/arrow_down.svg
+
+    - assets/images/pages/friend/kakao.svg
+    - assets/images/pages/friend/relate.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

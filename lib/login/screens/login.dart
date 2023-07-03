@@ -32,10 +32,6 @@ class LoginPage extends StatelessWidget {
         RefreshTokenResult refreshResult =
             await TokenManager.refreshAccessToken();
 
-        print("----");
-        print("Refreshed : " + refreshResult.refreshed.toString());
-        print("Success : " + refreshResult.success.toString());
-
         if (refreshResult.refreshed) {
           TokenManager.setAccessToken(
               accessToken: refreshResult.refreshedAccessToken!);
