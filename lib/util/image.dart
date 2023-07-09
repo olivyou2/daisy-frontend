@@ -18,6 +18,9 @@ class DaisyImages {
   static final naverClickedBtnImage =
       SvgPicture.asset("assets/images/login/clicked_naver.svg");
 
+  static final loginLogoImage =
+      SvgPicture.asset("assets/images/login/logo.svg");
+
   static final searchImage = SvgPicture.asset("assets/images/map/search.svg");
   static final deleteImage = SvgPicture.asset("assets/images/map/delete.svg");
   static final closeImage = SvgPicture.asset("assets/images/main/del.svg");
@@ -45,6 +48,10 @@ class DaisyImages {
       Image(image: AssetImage("assets/images/init/camera.png"));
   static const AssetImage dropdownBtnImage =
       AssetImage("assets/images/init/dropdown.png");
+  static final splashLogoImage =
+      SvgPicture.asset("assets/images/splash/logo.svg");
+  static final splashDaisyImage =
+      SvgPicture.asset("assets/images/splash/daisy.svg");
 
   // MOCKUP DATA
 

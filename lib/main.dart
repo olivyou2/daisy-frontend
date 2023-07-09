@@ -1,22 +1,35 @@
-import 'package:daisy_frontend/init/screens/init.dart';
-import 'package:daisy_frontend/login/screens/login.dart';
-import 'package:daisy_frontend/main/screens/main.dart';
+import 'package:daisy_frontend/page/login/screens/login.dart';
+import 'package:daisy_frontend/page/main/screens/main.dart';
+import 'package:daisy_frontend/page/pageStates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:daisy_frontend/page/register/register.dart';
+import 'package:daisy_frontend/page/register/screens/register.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() async {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Widget page;
+    PageState pageState = getPageState(ref);
+
+    if (pageState == PageState.login) {
+      page = LoginPage();
+    } else if (pageState == PageState.main) {
+      page = const MainPage();
+    } else if (pageState == PageState.register) {
+      page = const RegisterPage();
+    } else {
+      page = Container();
+    }
+
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       minTextAdapt: true,
@@ -42,7 +55,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: MainPage(),
+      child: page,
     );
   }
 }
